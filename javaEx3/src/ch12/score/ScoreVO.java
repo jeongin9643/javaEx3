@@ -1,5 +1,6 @@
 package ch12.score;
 
+//ScoreVo 객체 하나가 한 사람의 자료. Value Object
 public class ScoreVO {
 	private String hak;
 	private String name;

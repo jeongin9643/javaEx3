@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ScoreUI {
 	private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	private Score score = new ScoreImpl();
+	private Score score = new ScoreImpl();  // 업캐스팅. (score로 ScoreImpl 참조 가능-score에 정의된 추상 메소드만 가능 )
 	
 	public void menu() {
 		int ch;
@@ -40,7 +40,7 @@ public class ScoreUI {
 	protected void insert() {
 		System.out.println("\n 데이터 등록...");
 		try {
-			ScoreVO vo = new ScoreVO(); // ScoreVO 객체 생성 후 데이터 입력
+			ScoreVO vo = new ScoreVO(); // ScoreVO 객체 생성 후 데이터 입력. 한 사람당 새로운 객체 생성
 			
 			System.out.print("학번 ? ");
 			vo.setHak(br.readLine());
@@ -79,12 +79,12 @@ public class ScoreUI {
 			System.out.println("수정할 학번 ? ");
 			hak = br.readLine();
 			
-			ScoreVO vo = score.readScore(hak); // 학번이 있는 곳의 주소를 찾음
-			if(vo == null) {
+			ScoreVO vo = score.readScore(hak); // 해당 학번이 있는 곳의 주소를 찾음
+			if(vo == null) { // 학번이 있는 주소가 null일 경우
 				System.out.println(hak + "학번은 등록된 학번이 아닙니다.\n");
 				return;
 			}
-			
+			// 주소에 학번이 있는 경우 내용 수정
 			System.out.print("이름 ? ");
 			vo.setName(br.readLine());
 			
@@ -106,8 +106,6 @@ public class ScoreUI {
 		}
 		catch (Exception e) {
 		}
-		
-		
 	}
 	
 	protected void delete() {
@@ -136,7 +134,7 @@ public class ScoreUI {
 		List<ScoreVO> list = score.listScore();
 		int tot;
 		
-		for(ScoreVO vo : list) {
+		for(ScoreVO vo : list) { //  list 배열을 ScoreVO 타입의 vo변수에 담아 돌려 저장
 			tot = vo.getKor() + vo.getEng() + vo.getMat();
 			
 			System.out.print(vo.getHak()+"\t");
@@ -159,11 +157,11 @@ public class ScoreUI {
 			System.out.print("검색할 학번 ? ");
 			hak = br.readLine();
 			
-			ScoreVO vo = score.readScore(hak);
-			if(vo == null) {
+			ScoreVO vo = score.readScore(hak);// 해당 학번이 있는 곳의 주소를 찾음
+			if(vo == null) { // 해당 학번이 없는 경우
 				System.out.println(hak + "학번은 등록된 학번이 아닙니다.\n");
 				return;
-			}
+			}// 학번이 있는 경우 정보 출력
 			System.out.print(vo.getHak()+"\t");
 			System.out.print(vo.getName()+"\t");
 			System.out.print(vo.getKor()+"\t");
@@ -184,13 +182,13 @@ public class ScoreUI {
 			System.out.println("검색할 이름 ?");
 			name = br.readLine();
 			
-			List<ScoreVO> list = score.listScore(name);
-			if(list.size() == 0) {
+			List<ScoreVO> list = score.listScore(name); // list에 해당 이름이 있는 곳의 주소 찾기
+			if(list.size() == 0) { // 해당 이름이 없으면
 				System.out.println("등록된 이름이 없습니다.\n");
 				return;
 			}
-			
-			for(ScoreVO vo : list) {
+			// 해당 이름이 있으면
+			for(ScoreVO vo : list) {// list를 돌려 ScoreVO 타입의 vo 주소에 저장
 				System.out.print(vo.getHak()+"\t");
 				System.out.print(vo.getName()+"\t");
 				System.out.print(vo.getKor()+"\t");

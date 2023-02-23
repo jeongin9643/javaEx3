@@ -108,18 +108,26 @@ public class ScoreUI {
 				return;
 			}
 			
+			String name;
+			int kor, eng, mat;
+			
 			System.out.print("이름 ? ");
-			vo.setName(br.readLine());
+			name=br.readLine();
 			
 			System.out.print("국어 ? ");
-			vo.setKor(inputScore());
+			kor = inputScore();
 			
 			System.out.print("영어 ? ");
-			vo.setEng(inputScore());
+			eng = inputScore();
 			
 			System.out.print("수학 ? ");
-			vo.setMat(inputScore());
+			mat = inputScore();
 
+			vo.setName(name);
+			vo.setKor(kor);
+			vo.setEng(eng);
+			vo.setMat(mat);
+			
 			System.out.println("데이터가 수정되었습니다.");
 			
 		} catch (NumberFormatException e) {
